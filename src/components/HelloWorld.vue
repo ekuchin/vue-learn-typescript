@@ -2,7 +2,7 @@
   <div class="hello">
     <h1>Список котов</h1>
     <ul>
-      <li v-for="cat,index in catlist" :key="index">
+      <li v-for="cat,index in cats" :key="index">
          <p> {{cat.breed}} {{cat.name}}, вес {{cat.weight}}, {{cat.isAngry ? "сердит": "дружелюбен"}} </p>
       </li>
     </ul>
@@ -11,19 +11,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import catlist from "@/data/catlist"
+import { defineComponent, PropType } from 'vue';
 import {Cat} from "@/types/cat"
 
 export default defineComponent({
   name: 'HelloWorld',
   props: {
-    msg: String,
+    cats:{
+      type:Object as PropType<Cat[]>,
+      required:true
+    }
   },
   data() {
     return {
-      catlist: catlist,
-      anothercat:{} as Cat
+
     }
   },
 });
