@@ -13,6 +13,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import catlist from "@/data/catlist"
+import {Cat} from "@/types/cat"
 
 export default defineComponent({
   name: 'HelloWorld',
@@ -21,7 +22,8 @@ export default defineComponent({
   },
   data() {
     return {
-      catlist: catlist
+      catlist: catlist,
+      anothercat:{} as Cat
     }
   },
 });
