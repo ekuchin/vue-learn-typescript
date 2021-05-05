@@ -11,36 +11,38 @@
     <button @click="likeCat(1)">Погладь кота, ...</button>
     <button @click="likeCat(2)">Погладь двух котов, ...</button>
 
+    <form>
+      <input v-model="newcat.name"/>
+      <select v-model="newcat.breed">
+        <option>Манул</option>
+        <option>Сфинкс</option>
+        <option>Британец</option>
+      </select>
+      <br/>
+      <input v-model.number="newcat.weight"/>
+    
+    <input type="checkbox" id="isAngry" v-model="newcat.isAngry">
+    <label for="isAngry">Сердит</label>
+
+    </form>
+    <button @click="addCat(newcat)">Добавить кота</button>
+
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent } from 'vue';
 import {Cat} from "@/types/cat"
+import {useCats} from "@/use/useCats"
 
 export default defineComponent({
+  
+  setup(){   
+    const newcat:Cat = {name:"Мурка", breed:"Манул", weight:8, isAngry:false }    
+    return {newcat, ...useCats()}
+  },
+    
   name: 'HelloWorld',
-  props: {
-    cats:{
-      type:Object as PropType<Cat[]>,
-      required:true
-    }
-  },
-  data() {
-    return {
-     likedCount:0 as number
-    }
-  },
-  computed:{
-    catsCount():number{
-      return this.$props.cats.length
-    }
-  },
-  methods:{
-    likeCat(count:number){
-      this.likedCount+=count;
-    }
-  }
 
 });
 </script>
